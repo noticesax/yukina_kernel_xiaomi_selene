@@ -586,16 +586,20 @@ static int disp_validate_input_params(struct disp_input_config *cfg,
 	int layer_num)
 {
 	if (cfg->layer_id >= layer_num) {
+#ifdef CONFIG_MTK_AEE_AED
 		disp_aee_print("layer_id=%d > layer_num=%d\n",
 			cfg->layer_id, layer_num);
+#endif
 		return -1;
 	}
 	if (cfg->layer_enable) {
 		if ((cfg->src_fmt <= 0) || ((cfg->src_fmt >> 8) == 15) ||
 		    ((cfg->src_fmt >> 8) > (DISP_FORMAT_DIM >> 8))) {
+#ifdef CONFIG_MTK_AEE_AED
 			disp_aee_print(
 				"layer_id=%d,src_fmt=0x%x is invalid format\n",
 				cfg->layer_id, cfg->src_fmt);
+#endif
 			return -1;
 		}
 	}
@@ -606,8 +610,10 @@ static int disp_validate_output_params(struct disp_output_config *cfg)
 {
 	if ((cfg->fmt <= 0) || ((cfg->fmt >> 8) == 15) ||
 	    ((cfg->fmt >> 8) > (DISP_FORMAT_DIM >> 8))) {
+#ifdef CONFIG_MTK_AEE_AED
 		disp_aee_print("output fmt=0x%x is invalid color format\n",
 			cfg->fmt);
+#endif
 		return -1;
 	}
 
@@ -623,9 +629,11 @@ int disp_validate_ioctl_params(struct disp_frame_cfg_t *cfg)
 		return -1;
 
 	if (cfg->input_layer_num > _get_max_layer(cfg->session_id)) {
+#ifdef CONFIG_MTK_AEE_AED
 		disp_aee_print("sess:0x%x layer_num %d>%d\n",
 			cfg->session_id, cfg->input_layer_num,
 			_get_max_layer(cfg->session_id));
+#endif
 		return -1;
 	}
 
@@ -965,8 +973,10 @@ static long _frame_queue_config(unsigned long arg)
 
 	if (copy_from_user(frame_cfg, (void __user *)arg, sizeof(*frame_cfg))) {
 		ret_val = ERR_PTR(-EFAULT);
+#ifdef CONFIG_MTK_AEE_AED
 		disp_aee_print(" copy_from_user failed! line:%d\n",
 			__LINE__);
+#endif
 		goto Error;
 	}
 
@@ -977,7 +987,9 @@ static long _frame_queue_config(unsigned long arg)
 
 	head = get_frame_queue_head(frame_cfg->session_id);
 	if (!head) {
+#ifdef CONFIG_MTK_AEE_AED
 		disp_aee_print("error to get frame queue!!\n");
+#endif
 		return -EINVAL;
 	}
 
@@ -1092,7 +1104,9 @@ static int _ioctl_wait_all_jobs_done(unsigned long arg)
 
 	head = get_frame_queue_head(session_id);
 	if (!head) {
+#ifdef CONFIG_MTK_AEE_AED
 		disp_aee_print("%s:error to get frame queue!!\n", __func__);
+#endif
 		return -EINVAL;
 	}
 
