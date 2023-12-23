@@ -1022,7 +1022,7 @@ static int mmc_blk_check_disk_range_wp(struct gendisk *disk,
 	quot = start;
 	remain = do_div(quot, card->wp_grp_size);
 	if (remain) {
-		pr_notice("Start 0x%llx of disk %s not write group aligned\n",
+		pr_debug("Start 0x%llx of disk %s not write group aligned\n",
 			(unsigned long long)part_start, disk->disk_name);
 		start -= remain;
 	}
@@ -1031,7 +1031,7 @@ static int mmc_blk_check_disk_range_wp(struct gendisk *disk,
 	quot = end;
 	remain = do_div(quot, card->wp_grp_size);
 	if (remain) {
-		pr_notice("End 0x%llx of disk %s not write group aligned\n",
+		pr_debug("End 0x%llx of disk %s not write group aligned\n",
 			(unsigned long long)part_start, disk->disk_name);
 		end += card->wp_grp_size - remain;
 	}
