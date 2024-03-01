@@ -8123,10 +8123,8 @@ static int wlan_pm_notifier_callback(struct notifier_block
 	if (kalHaltTryLock())
 		return NOTIFY_STOP;
 
-	if (kalIsHalted() || !prGlueInfo) {
-		kalHaltUnlock();
-		return NOTIFY_STOP;
-	}
+	if (kalIsHalted() || !prGlueInfo)
+		goto out;
 
 	switch (event) {
 	case PM_SUSPEND_PREPARE:
