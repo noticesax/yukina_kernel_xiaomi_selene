@@ -364,11 +364,12 @@ dual_swchg_select_charging_current_limit(struct charger_manager *info)
 				info->data.apple_2_1a_charger_current;
 		pdata->charging_current_limit =
 				info->data.apple_2_1a_charger_current;
-	} else if (info->chr_type == POWER_SUPPLY_TYPE_USB_HVDCP) {
-          pdata->input_current_limit = 2000000;
-          pdata->charging_current_limit = 6000000;
-          pr_err("POWER_SUPPLY_TYPE_USB_HVDCP set icl\n");
+	} else if (info->chr_type == CHARGER_TYPE_HVDCP) {
+	    pdata->input_current_limit = 2000000;
+	    pdata->charging_current_limit = 6000000;
+	    pr_err("POWER_SUPPLY_TYPE_USB_HVDCP set icl\n");
 	}
+
 /*K19A HQ-133296 K19A charger of low temperature by wangqi at 2021/4/27 start*/
 #if 0
 	if (info->enable_sw_jeita) {
