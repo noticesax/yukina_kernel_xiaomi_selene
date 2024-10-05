@@ -160,7 +160,7 @@ send_msg_telegram() {
         -F chat_id="$chat_id" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="(merlinx) Build Succes: ${minutes}min & ${seconds}secs." \
+        -F caption="selene build Succes!: ${minutes}min & ${seconds}secs." \
         -o /dev/null \
         -w "" >/dev/null 2>&1
       curl -s -F document=@./out/build.log "https://api.telegram.org/bot$token/sendDocument" \
