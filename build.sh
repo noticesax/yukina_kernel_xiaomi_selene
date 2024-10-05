@@ -25,7 +25,7 @@ export LINKER="ld.lld"
 export SEND_TO_TG=1
 
 # Telegram && Output
-export kver="KernelSU"
+export kver="-"
 export CODENAME="selene"
 export DEVICE="Redmi 10 (${CODENAME})"
 export BUILDER="äerichāndesu"
