@@ -32,7 +32,7 @@ export BUILDER="äerichāndesu"
 export BUILD_HOST="noticesa"
 export TIMESTAMP=$(date +"%Y%m%d")
 export KBUILD_COMPILER_STRING=$(./clang/bin/clang -v 2>&1 | head -n 1 | sed 's/(https..*//' | sed 's/ version//')
-export zipn="Yukina-starlight-${CODENAME}-${TIMESTAMP}"
+export zipn="Yukina-starlight-${TIMESTAMP}"
 # Needed by script
 export PATH="${PWD}/clang/bin:${PATH}"
 PROCS=$(nproc --all)
